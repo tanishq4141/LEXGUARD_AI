@@ -32,7 +32,16 @@ export async function analyzeText(
     throw new Error(safeErrorMsg);
   }
 
-  return response.json();
+  const data = await response.json();
+  
+  // Hackathon Integration: Trigger Firebase Analytics
+  if (typeof window !== 'undefined' && (window as any).firebaseAnalytics) {
+    (window as any).firebaseAnalytics.logEvent('contract_analyzed', {
+      model, contract_type: contractType, user_role: userRole
+    });
+  }
+  
+  return data;
 }
 
 export async function uploadFile(
@@ -63,7 +72,16 @@ export async function uploadFile(
     throw new Error(safeErrorMsg);
   }
 
-  return response.json();
+  const data = await response.json();
+  
+  // Hackathon Integration: Trigger Firebase Analytics
+  if (typeof window !== 'undefined' && (window as any).firebaseAnalytics) {
+    (window as any).firebaseAnalytics.logEvent('file_uploaded', {
+      file_type: file.type, model, contract_type: contractType
+    });
+  }
+  
+  return data;
 }
 
 export async function getSampleContract(): Promise<string> {

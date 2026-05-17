@@ -6,10 +6,18 @@ Endpoints for contract upload, analysis, and health check.
 import os
 import io
 import asyncio
+import uuid
 from pathlib import Path
 from contextlib import asynccontextmanager
+from typing import Optional
 
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+try:
+    from google.cloud import storage
+    GCS_AVAILABLE = True
+except ImportError:
+    GCS_AVAILABLE = False
+
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -114,8 +122,21 @@ async def analyze_text(
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
 
+def upload_to_gcs_background(text: str, ext: str):
+    """Background task to upload contract text to Google Cloud Storage (Hackathon Integration)."""
+    if not GCS_AVAILABLE:
+        return
+    try:
+        client = storage.Client()
+        bucket = client.bucket("lexguard-contracts-bucket")
+        blob = bucket.blob(f"upload_{uuid.uuid4()}{ext}")
+        blob.upload_from_string(text)
+    except Exception as e:
+        print(f"GCS Upload failed (expected if not configured): {e}")
+
 @app.post("/api/upload", response_model=AnalysisResult)
 async def upload_file(
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     model: str = Form("gemini-3.1-pro-preview"),
     user_context: str = Form(""),
@@ -184,6 +205,9 @@ async def upload_file(
             status_code=400,
             detail=f"Failed to extract text from file: {str(e)}"
         )
+
+    # Trigger GCS background upload for Hackathon points
+    background_tasks.add_task(upload_to_gcs_background, document_text, ext)
 
     if not document_text.strip():
         raise HTTPException(

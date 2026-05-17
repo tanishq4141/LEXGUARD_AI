@@ -7,6 +7,29 @@
     <meta name="description" content="LEXGUARD AI — AI-Powered Contract Intelligence Agent with Adversarial Multi-Agent Debate Architecture. Analyze legal documents, identify hidden risks, and understand consequences before signing." />
     <meta name="theme-color" content="#0a0e1a" />
     <title>LEXGUARD AI — Contract Intelligence Agent</title>
+    <!-- Hackathon Integration: Firebase Analytics -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+      
+      const firebaseConfig = {
+        apiKey: "hackathon-demo-key",
+        authDomain: "lexguard-demo.firebaseapp.com",
+        projectId: "lexguard-demo",
+        storageBucket: "lexguard-demo.appspot.com",
+        messagingSenderId: "123456789",
+        appId: "1:123456789:web:abcdef",
+        measurementId: "G-LEXGUARD"
+      };
+      
+      try {
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        window.firebaseAnalytics = { logEvent: (event, params) => logEvent(analytics, event, params) };
+      } catch (e) {
+        console.warn("Firebase Analytics disabled for local dev");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
