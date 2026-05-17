@@ -10,6 +10,8 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
@@ -277,3 +279,25 @@ survive termination of this Agreement for a period of ten (10) years.
 async def get_sample_contract():
     """Return a sample adversarial contract for demo purposes."""
     return {"text": SAMPLE_CONTRACT.strip()}
+
+# Serve Frontend Build (for production/Cloud Run deployment)
+frontend_build_dir = Path(__file__).parent.parent / "frontend" / "dist"
+
+if frontend_build_dir.exists() and frontend_build_dir.is_dir():
+    # Mount static assets (JS, CSS, images)
+    app.mount("/assets", StaticFiles(directory=frontend_build_dir / "assets"), name="assets")
+    
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        # Prevent accessing API routes via frontend handler
+        if full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail="API route not found")
+            
+        file_path = frontend_build_dir / full_path
+        
+        # If the requested file exists, serve it
+        if file_path.is_file():
+            return FileResponse(file_path)
+            
+        # Otherwise, serve index.html for React Router
+        return FileResponse(frontend_build_dir / "index.html")

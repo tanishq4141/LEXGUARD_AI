@@ -1,0 +1,59 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: your-google-cloud-project-id
+  REGION: us-central1
+  SERVICE_NAME: lexguard-ai
+
+jobs:
+  deploy:
+    name: Deploy to Cloud Run
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- AUTHENTICATION ---
+      # Option 1: Workload Identity Federation (Recommended by Google)
+      # Uncomment the block below and configure the workload_identity_provider in GitHub Secrets
+      # - name: Google Auth
+      #   id: auth
+      #   uses: google-github-actions/auth@v2
+      #   with:
+      #     workload_identity_provider: '${{ secrets.WIF_PROVIDER }}' # e.g. "projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+      #     service_account: '${{ secrets.SA_EMAIL }}'               # e.g. "my-service-account@my-project.iam.gserviceaccount.com"
+
+      # Option 2: Service Account JSON Key
+      # Remove this block if you use Workload Identity Federation above
+      - name: Google Auth (Service Account Key)
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      # --- DEPLOYMENT ---
+      # This action automatically builds the Dockerfile from source using Cloud Build
+      # and deploys it to Cloud Run.
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          source: .
+          env_vars: |
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
+
+      - name: Show Output
+        run: echo "Deployed URL is ${{ steps.deploy.outputs.url }}"

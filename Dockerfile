@@ -42,5 +42,5 @@ ENV HOST=0.0.0.0
 EXPOSE 8080
 
 # Start the FastAPI server using Uvicorn
-# Cloud Run will automatically bind to the PORT environment variable
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8080"]
+WORKDIR /app/backend
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
