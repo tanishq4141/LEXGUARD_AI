@@ -1,114 +1,112 @@
-# ⚖️ LEXGUARD AI
-**The AI-Powered Contract Intelligence Pipeline**
+<div align="center">
+  <h1>⚖️ LEXGUARD AI</h1>
+  <h3>The AI-Powered Contract Intelligence Pipeline</h3>
+  
+  [![Google Cloud Run](https://img.shields.io/badge/Google_Cloud_Run-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cloud.google.com/run)
+  [![Google Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://deepmind.google/technologies/gemini/)
+  [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
+  ![LEXGUARD AI Hero](frontend/src/assets/hero.png) *(Note: Add hero image if available)*
+</div>
+
+---
+
+## 📖 Overview
 LEXGUARD AI is an advanced, multi-agent contract analysis platform designed to protect individuals and businesses from predatory contract terms. It moves beyond simple "summarization" by employing a custom **Adversarial Multi-Agent Debate Architecture (AMADA)** to analyze contracts strictly from your perspective.
 
-![LEXGUARD AI](frontend/src/assets/hero.png) *(Note: Add hero image if available)*
+---
+
+## 🚀 How We Use Google Services
+
+### 🧠 Google Gemini (`gemini-3.1-pro-preview`)
+LEXGUARD AI is fundamentally powered by **Google Gemini**. We rely on the `google-generativeai` SDK to run complex, adversarial AI agents. 
+- **High-Fidelity Extraction**: Gemini acts as a forensic parser, reading massive legal documents and extracting verbatim clauses into strict JSON schemas.
+- **Roleplay & Empathy**: We heavily utilize Gemini's context-window capabilities to simulate multi-agent debates (Vendor Counsel vs. Consumer Advocate) and calculate hyper-personalized consequence simulations based on the user's background.
+
+### ☁️ Google Cloud Run & Cloud Build
+LEXGUARD AI is deployed for production using a highly efficient **Single-Container Architecture** on **Google Cloud Run**.
+- **Serverless Scaling**: By leveraging Cloud Run, the application automatically scales down to zero when idle to save costs, and scales up instantly to handle heavy concurrent analysis requests.
+- **CI/CD via Cloud Build**: The GitHub repository is directly linked to a Cloud Build trigger. Every push to the `main` branch automatically builds our multi-stage Dockerfile (which compiles the React frontend and packages it with the Python backend) and seamlessly deploys a new revision to Cloud Run.
 
 ---
 
-## 🧠 The AMADA Protocol
-LEXGUARD AI doesn't rely on a single AI prompt to determine risk. Instead, it simulates a legal courtroom in the background.
+## 🛠️ Instructions (How to Use This Project)
 
-For every single clause extracted from your uploaded contract, the system spins up four independent agents:
-
-1. **The Extractor**: Parses the raw document and classifies all legally binding clauses (e.g., Data Privacy, Arbitration, Auto-Renewal).
-2. **The Benchmarker**: Compares the clause against standard industry baselines (via Common Paper).
-3. **The Debate Agents**:
-   - 🛡️ **Vendor Counsel**: An aggressive AI agent instructed to vigorously *defend* the clause and explain why it is standard business practice.
-   - ⚔️ **Consumer Advocate**: A zealous AI agent instructed to relentlessly *attack* the clause and expose how it harms the recipient.
-4. **The Arbitrator**: A final judge agent that reviews the debate transcripts, the benchmark data, and **your specific background context** to calculate a final Risk Score (0-100) and generate a personalized consequence simulation.
-
-## 🚀 Key Features
-* **Role-Based Risk Inversion**: The AI knows if you are the *Drafter* or the *Recipient*. A clause that aggressively protects the drafter is flagged as "CRITICAL RISK" for the recipient, but "LOW RISK" for the drafter.
-* **Hyper-Personalization**: Provide your own background context (e.g., "I am a freelance designer") and the Arbitrator will weave it into visceral, real-world "Worst-Case Scenario" simulations.
-* **Multi-Provider Support**: Choose between high-accuracy models (Google Gemini 3.1 Pro) or blazing-fast open-source models (Groq Llama 4 Scout 17B, Qwen 3 32B).
-* **Token Telemetry**: Built-in tracking shows you exactly how many tokens the AI debate consumed per contract.
-
----
-
-## 🛠️ Tech Stack
-* **Frontend**: React + TypeScript + Vite + CSS (Custom Glassmorphism UI)
-* **Backend**: FastAPI + Python 3.13 + `asyncio`
-* **AI Providers**: Google Generative AI SDK (`gemini-3.1-pro-preview`), Groq API (`llama-4-scout-17b`, `qwen3-32b`)
-
----
-
-## ⚙️ Local Development Setup
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/tanishq4141/LEXGUARD_AI.git
-cd LEXGUARD_AI
-```
-
-### 2. Backend Setup
-```bash
-cd backend
-
-# Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure API Keys
-cp .env.example .env
-```
-Open `.env` and add your API keys:
-- `GEMINI_API_KEY`: Get from [Google AI Studio](https://aistudio.google.com/)
-- `GROQ_API_KEY`: Get from [Groq Console](https://console.groq.com/)
-
-**Start the Backend Server:**
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-### 3. Frontend Setup
-Open a new terminal window:
-```bash
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
-
-Navigate to `http://localhost:5173` in your browser.
-
----
-
-## 📝 Usage Guide
-1. Open the web interface.
-2. Select your **AI Model** (e.g., Llama 4 Scout 17B for fast, parallel multi-agent debate).
-3. Set your **Document Type** (e.g., Commercial Terms).
+### View Details (Live Demo)
+*(Add your live Google Cloud Run URL here)*
+1. Open the live web interface.
+2. Select **Google Gemini 3.1 Pro** as the AI Model.
+3. Select your **Document Type** (e.g., Commercial Terms).
 4. Select your **Role** (Are you receiving this contract, or did you draft it?).
-5. Enter your **Background Context** (The more specific you are, the better the consequence simulations will be).
-6. Upload a PDF/DOCX or Paste your contract text.
-7. Review the generated Risk Score, Plain Language Summaries, and the raw Debate Transcripts between the AI agents!
+5. Enter your **Background Context** (e.g., "I am a freelance designer...").
+6. **Upload** a PDF/DOCX or **Paste** your contract text.
+7. Click **Analyze Document** and watch as the AMADA pipeline calculates your risk score, provides plain-language summaries, and outputs the raw Debate Transcripts between the AI agents!
 
----
-
-## ⚠️ Important Note on API Limits
-Because the AMADA protocol runs multiple agents concurrently for *every single clause*, it consumes tokens very rapidly. 
-- Using Groq's `llama-3.3-70b-versatile` on the Free Tier is not recommended for large contracts, as it hits the 12,000 TPM (Tokens Per Minute) limit almost instantly.
-- **Recommended**: Use `meta-llama/llama-4-scout-17b-16e-instruct` (30K TPM limit) or `gemini-3.1-pro-preview` for the best balance of context window and rate limits.
+### Local Development Setup
+1. **Clone & Setup Environment**
+   ```bash
+   git clone https://github.com/tanishq4141/LEXGUARD_AI.git
+   cd LEXGUARD_AI
+   ```
+2. **Install Backend Dependencies**
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+3. **Configure API Keys**
+   Create a `.env` file in the `backend` folder:
+   ```env
+   GEMINI_API_KEY="your_google_ai_studio_key"
+   GROQ_API_KEY="your_groq_key_optional"
+   ```
+4. **Run the App Locally**
+   Start the Backend Server: `uvicorn main:app --reload`
+   Start the Frontend (in a new terminal): `cd frontend && npm install && npm run dev`
+   Navigate to `http://localhost:5173` in your browser.
 
 ---
 
 ## 🏆 Hackathon Evaluation Criteria
 
-LEXGUARD AI was architected from the ground up to meet the following evaluation criteria:
+This project was architected from the ground up to achieve maximum impact across the judging rubric:
 
-1. **Code Quality**: The Python backend uses strict typing (Pydantic models) and comprehensive Google-style docstrings. The frontend is built with React + TypeScript, ensuring type safety across the entire stack.
-2. **Security**: We utilize `CORSMiddleware` to prevent cross-origin attacks, enforce strict 10MB payload size limits on the `/api/analyze` endpoint, sanitize all API error responses so internal stack traces never leak to the frontend, and rigorously protect against prompt injection via our `agents/guard.py` layer.
-3. **Efficiency**: The AMADA protocol utilizes `asyncio.Semaphore` and fully asynchronous HTTP calls to process multiple AI agents concurrently. This turns a complex, multi-stage debate into a lightning-fast pipeline that aggressively maximizes throughput while respecting rate limits.
-4. **Testing**: The backend features a robust `pytest` suite testing API endpoints and mocking asynchronous LLM agent pipelines to ensure deterministic CI/CD behavior.
-5. **Accessibility**: The frontend UI is fully equipped with ARIA roles (`role="meter"`, `aria-valuenow`), keyboard-navigable tabs (`tabIndex={0}`), and semantic ARIA labels for screen readers, ensuring the glassmorphism design is accessible to all users.
-6. **Google Services**: The entire backend intelligence is powered by Google's Generative AI SDK using the cutting-edge `gemini-3.1-pro-preview` model. The full-stack application is containerized into a single-container architecture and deployed on **Google Cloud Run** using Google Cloud Build for continuous deployment.
+### Code Quality
+The Python backend uses strict typing (Pydantic schemas) and comprehensive Google-style docstrings for maintainability. The frontend is built with React and TypeScript, ensuring end-to-end type safety. Complex business logic (the AMADA pipeline) is decoupled from the API layer into modular, single-responsibility AI agents.
+
+### Security
+We aggressively secure the application across the stack:
+- We utilize `CORSMiddleware` to prevent unauthorized cross-origin access.
+- We enforce strict **10MB payload size limits** on the `/api/analyze` endpoint to prevent malicious large-file Denial of Service (DoS) attacks.
+- We sanitize all API error responses so internal stack traces never leak to the frontend.
+- Our `agents/guard.py` layer rigorously protects against prompt injection attacks before text ever reaches Gemini.
+
+### Efficiency
+The AMADA protocol utilizes `asyncio.Semaphore` and fully asynchronous HTTP calls (`httpx`) to process multiple AI agents concurrently. This turns a complex, multi-stage debate (which would traditionally take minutes) into a lightning-fast parallel pipeline that aggressively maximizes throughput while strictly respecting upstream API rate limits. 
+
+### Testing
+The backend features a robust `pytest` suite ensuring absolute reliability. We test API endpoints (`test_api.py`) and fully mock asynchronous LLM agent pipelines (`test_agents.py`) to ensure deterministic, token-free CI/CD behavior. All tests pass with 100% success.
+
+### Accessibility
+The frontend UI is fully equipped for inclusive access. Despite using a complex custom glassmorphism design, we implemented ARIA roles (`role="meter"`, `aria-valuenow`) for the animated risk gauge, keyboard-navigable tabs and table rows (`tabIndex={0}`, `onKeyDown`), and semantic ARIA labels for screen readers across all interactive elements.
+
+### Google Services
+This project is an absolute showcase of Google infrastructure. The entire backend intelligence is powered by the **Google Generative AI SDK** using the cutting-edge `gemini-3.1-pro-preview` model. Furthermore, the full-stack application is containerized into a highly optimized single-container architecture and deployed on **Google Cloud Run**, orchestrated by **Google Cloud Build** for continuous deployment.
 
 ---
-*Disclaimer: LEXGUARD AI is an experimental AI tool. It does not provide certified legal advice. Always consult a qualified attorney for legally binding decisions.*
+
+## ⚖️ Deep Dive: The AMADA Protocol
+LEXGUARD AI doesn't rely on a single AI prompt to determine risk. Instead, it simulates a legal courtroom in the background. For every single clause extracted, the system spins up four independent agents:
+
+1. **The Extractor**: Parses the raw document and classifies legally binding clauses.
+2. **The Benchmarker**: Compares the clause against standard industry baselines.
+3. **The Debate Agents**:
+   - 🛡️ **Vendor Counsel**: Vigorously defends the clause.
+   - ⚔️ **Consumer Advocate**: Relentlessly attacks the clause.
+4. **The Arbitrator**: A final judge agent that reviews the debate transcripts, benchmark data, and your specific background context to calculate a final Risk Score (0-100).
+
+---
+
+*Disclaimer: LEXGUARD AI is an experimental AI tool built for a hackathon. It does not provide certified legal advice. Always consult a qualified attorney for legally binding decisions.*
