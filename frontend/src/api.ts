@@ -1,0 +1,79 @@
+/* LEXGUARD AI — API Service */
+
+import type { AnalysisResult } from './types';
+
+const API_BASE = '';
+
+export async function analyzeText(
+  text: string, 
+  model: string = 'gemini-3.1-pro-preview',
+  userContext: string = '',
+  userRole: string = 'recipient',
+  contractType: string = 'Unknown'
+): Promise<AnalysisResult> {
+  const formData = new FormData();
+  formData.append('text', text);
+  formData.append('model', model);
+  formData.append('user_context', userContext);
+  formData.append('user_role', userRole);
+  formData.append('contract_type', contractType);
+
+  const response = await fetch(`${API_BASE}/api/analyze`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ detail: 'Unknown error' }));
+    throw new Error(err.detail || `HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function uploadFile(
+  file: File, 
+  model: string = 'gemini-3.1-pro-preview',
+  userContext: string = '',
+  userRole: string = 'recipient',
+  contractType: string = 'Unknown'
+): Promise<AnalysisResult> {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('model', model);
+  formData.append('user_context', userContext);
+  formData.append('user_role', userRole);
+  formData.append('contract_type', contractType);
+
+  const response = await fetch(`${API_BASE}/api/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ detail: 'Unknown error' }));
+    throw new Error(err.detail || `HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function getSampleContract(): Promise<string> {
+  const response = await fetch(`${API_BASE}/api/sample-contract`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch sample contract');
+  }
+
+  const data = await response.json();
+  return data.text;
+}
+
+export async function healthCheck(): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE}/api/health`);
+    return response.ok;
+  } catch {
+    return false;
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "standards": {
+    "LIMITATION_OF_LIABILITY": {
+      "source": "Common Paper Cloud Service Agreement (CSA) v1.0",
+      "baseline_text": "Neither party's aggregate liability under this Agreement will exceed the amounts paid or payable by Customer during the twelve (12) month period immediately preceding the claim. Neither party will be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, or business opportunities.",
+      "fair_principles": [
+        "Liability is mutual and capped at 12 months of fees",
+        "Both parties share the same limitation structure",
+        "Excludes indirect/consequential damages symmetrically"
+      ]
+    },
+    "INDEMNIFICATION": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "Provider will indemnify Customer against third-party claims alleging that the Service infringes intellectual property rights. Customer will indemnify Provider against third-party claims arising from Customer's use of the Service in violation of this Agreement. The indemnifying party will have sole control of the defense and settlement.",
+      "fair_principles": [
+        "Mutual indemnification obligations",
+        "Provider covers IP infringement of its own service",
+        "Customer covers misuse-related claims",
+        "Indemnifying party controls defense"
+      ]
+    },
+    "DATA_PRIVACY": {
+      "source": "Common Paper CSA v1.0 / DPA",
+      "baseline_text": "Provider will process Customer Data only in accordance with Customer's documented instructions. Provider will implement and maintain appropriate technical and organizational security measures. Provider will promptly notify Customer of any data breach. Upon termination, Provider will delete or return all Customer Data within 30 days.",
+      "fair_principles": [
+        "Processing limited to customer instructions",
+        "Security measures required of provider",
+        "Breach notification is mandatory and prompt",
+        "Data returned or deleted on termination"
+      ]
+    },
+    "IP_TRANSFER": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "Each party retains all rights in its pre-existing intellectual property. Customer retains all rights in Customer Data. Provider retains all rights in the Service. No intellectual property rights are transferred by this Agreement except the limited license rights expressly granted.",
+      "fair_principles": [
+        "No broad IP assignment — only license grants",
+        "Customer retains ownership of their data",
+        "Provider retains ownership of the service",
+        "Pre-existing IP remains with original owner"
+      ]
+    },
+    "TERMINATION": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "Either party may terminate this Agreement for convenience upon thirty (30) days' prior written notice. Either party may terminate for cause if the other party materially breaches and fails to cure within thirty (30) days of written notice. Upon termination, Provider will make Customer Data available for export for at least 30 days.",
+      "fair_principles": [
+        "Mutual termination rights",
+        "Reasonable cure period for breaches",
+        "Data portability after termination",
+        "Convenience termination available to both parties"
+      ]
+    },
+    "AUTO_RENEWAL": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "The initial term will automatically renew for successive one-year periods unless either party provides written notice of non-renewal at least thirty (30) days before the end of the then-current term.",
+      "fair_principles": [
+        "Auto-renewal periods are reasonable (1 year)",
+        "Either party can opt out with 30 days notice",
+        "Renewal terms are clearly stated upfront"
+      ]
+    },
+    "ARBITRATION": {
+      "source": "Common Paper MNDA v1.0",
+      "baseline_text": "Any dispute arising under this Agreement will be resolved by binding arbitration administered by a nationally recognized arbitration body under its then-current rules. The arbitration will take place in a mutually agreed location. Each party will bear its own costs, and the parties will share arbitration fees equally.",
+      "fair_principles": [
+        "Neutral arbitration body",
+        "Mutually agreed location",
+        "Shared costs — not one-sided fee burden",
+        "Standard commercial arbitration rules apply"
+      ]
+    },
+    "NON_COMPETE": {
+      "source": "General Industry Standard",
+      "baseline_text": "During the term and for a period of twelve (12) months following termination, Employee agrees not to directly compete with the Company within the same geographic market. This restriction applies only to the specific business line in which the Employee was engaged.",
+      "fair_principles": [
+        "Duration limited to 12 months post-termination",
+        "Geographically scoped, not worldwide",
+        "Limited to specific business line, not all industries",
+        "Does not prevent all employment"
+      ]
+    },
+    "CONFIDENTIALITY": {
+      "source": "Common Paper MNDA v1.0",
+      "baseline_text": "Each party agrees to hold the other party's Confidential Information in confidence using at least the same degree of care it uses for its own confidential information, but no less than reasonable care. Confidential Information excludes information that is publicly available, independently developed, or rightfully received from a third party.",
+      "fair_principles": [
+        "Mutual confidentiality obligations",
+        "Reasonable standard of care",
+        "Clear exclusions for public/independent information",
+        "Time-limited obligation (typically 3-5 years)"
+      ]
+    },
+    "GOVERNING_LAW": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "This Agreement will be governed by and construed in accordance with the laws of the state specified in the Order Form, without regard to conflicts of law principles. Each party consents to the exclusive jurisdiction of the courts located in the governing jurisdiction.",
+      "fair_principles": [
+        "Governing law specified clearly",
+        "Jurisdiction is predictable and disclosed",
+        "Conflicts of law exclusion for clarity"
+      ]
+    },
+    "PAYMENT_TERMS": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "Customer will pay all fees specified in the applicable Order Form within thirty (30) days of the invoice date. Late payments will accrue interest at the lesser of 1.5% per month or the maximum rate permitted by law.",
+      "fair_principles": [
+        "Net 30 payment terms",
+        "Interest capped at reasonable rate or legal maximum",
+        "Fees specified in advance via order form"
+      ]
+    },
+    "WARRANTY": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "Provider warrants that the Service will perform materially in accordance with the applicable documentation during the term. If the Service fails to meet this warranty, Provider will, at its option, correct the non-conformance or refund the fees paid for the affected period.",
+      "fair_principles": [
+        "Performance warranty tied to documentation",
+        "Remedy includes correction or refund",
+        "Warranty applies during the full term"
+      ]
+    },
+    "FORCE_MAJEURE": {
+      "source": "General Industry Standard",
+      "baseline_text": "Neither party will be liable for any failure or delay in performing its obligations where such failure or delay results from circumstances beyond the reasonable control of that party, including but not limited to acts of God, natural disasters, war, terrorism, pandemics, or government actions. The affected party must provide prompt notice and use reasonable efforts to mitigate the impact.",
+      "fair_principles": [
+        "Mutual applicability",
+        "Enumerated but non-exhaustive triggers",
+        "Notice and mitigation requirements",
+        "Does not excuse payment obligations"
+      ]
+    },
+    "ASSIGNMENT": {
+      "source": "Common Paper CSA v1.0",
+      "baseline_text": "Neither party may assign this Agreement without the prior written consent of the other party, except in connection with a merger, acquisition, or sale of all or substantially all of the assigning party's assets.",
+      "fair_principles": [
+        "Mutual consent required for assignment",
+        "Exception for mergers/acquisitions is standard",
+        "Prevents unilateral transfer of obligations"
+      ]
+    }
+  }
+}

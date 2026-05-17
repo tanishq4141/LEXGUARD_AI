@@ -1,0 +1,113 @@
+/* ClauseTable CSS */
+
+.clause-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+}
+
+.clause-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.clause-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(17, 24, 39, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.clause-row {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.05);
+}
+
+.clause-row:hover {
+  background: rgba(6, 182, 212, 0.04);
+}
+
+.clause-row.selected {
+  background: rgba(6, 182, 212, 0.08);
+  border-left: 3px solid var(--accent-primary);
+}
+
+.clause-row td {
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+.risk-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.risk-dot-low {
+  background: var(--risk-low);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.risk-dot-medium {
+  background: var(--risk-medium);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
+}
+
+.risk-dot-high {
+  background: var(--risk-high);
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}
+
+.risk-dot-critical {
+  background: var(--risk-critical);
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.5);
+  animation: pulse-critical 2s ease-in-out infinite;
+}
+
+.clause-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.clause-icon {
+  font-size: 1rem;
+}
+
+.clause-summary-cell {
+  color: var(--text-secondary);
+  line-height: 1.4;
+  max-width: 380px;
+}
+
+.score-cell {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.score-value {
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-family: var(--font-mono);
+}
+
+.score-max {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
