@@ -45,7 +45,16 @@ export default function RiskGauge({ score, level, size = 220, label = 'Contract 
   const center = size / 2;
 
   return (
-    <div className="risk-gauge" style={{ width: size, height: size }}>
+    <div 
+      className="risk-gauge" 
+      style={{ width: size, height: size }}
+      role="meter"
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={score}
+      aria-valuetext={`Risk level is ${level} with a score of ${score} out of 100`}
+    >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {/* Background arc */}
         <circle

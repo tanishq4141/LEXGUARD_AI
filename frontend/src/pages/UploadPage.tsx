@@ -194,16 +194,20 @@ export default function UploadPage({ onAnalysisComplete }: UploadPageProps) {
 
             <div className="config-field">
               <label>My Role in this Contract</label>
-              <div className="role-toggle">
+              <div className="role-toggle" role="group" aria-label="Select your role in the contract">
                 <button 
                   className={`role-btn ${userRole === 'recipient' ? 'active' : ''}`}
                   onClick={() => setUserRole('recipient')}
+                  aria-pressed={userRole === 'recipient'}
+                  aria-label="I am the recipient of this contract"
                 >
                   For Me (Recipient)
                 </button>
                 <button 
                   className={`role-btn ${userRole === 'drafter' ? 'active' : ''}`}
                   onClick={() => setUserRole('drafter')}
+                  aria-pressed={userRole === 'drafter'}
+                  aria-label="I am the drafter of this contract"
                 >
                   From Me (Drafter)
                 </button>
@@ -232,6 +236,10 @@ export default function UploadPage({ onAnalysisComplete }: UploadPageProps) {
           onDrop={handleFileDrop}
           onClick={() => fileInputRef.current?.click()}
           id="file-drop-zone"
+          role="button"
+          tabIndex={0}
+          aria-label="Drop your contract here or click to browse files"
+          onKeyDown={(e) => { if(e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click(); }}
         >
           <input
             ref={fileInputRef}

@@ -67,6 +67,19 @@ async def analyze_contract(
          b. AMADA adversarial debate
       4. Arbitrator synthesis
       5. Aggregate into final AnalysisResult with token usage
+
+    Args:
+        gemini_api_key (str): The Google Gemini API key.
+        groq_api_key (str): The Groq API key for Llama/Qwen models.
+        document_text (str): The raw text of the uploaded contract.
+        model_name (str, optional): The AI model to use. Defaults to "gemini-3.1-pro-preview".
+        user_context (str, optional): Background info provided by the user. Defaults to "".
+        user_role (str, optional): Whether the user is the drafter or recipient. Defaults to "recipient".
+        contract_type (str, optional): The type of contract being analyzed. Defaults to "Unknown".
+
+    Returns:
+        AnalysisResult: The structured Pydantic object containing the overall risk score,
+                        extracted clauses, debate transcripts, and token telemetry.
     """
     tracker = TokenTracker()
 

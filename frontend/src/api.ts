@@ -24,8 +24,12 @@ export async function analyzeText(
   });
 
   if (!response.ok) {
-    const err = await response.json().catch(() => ({ detail: 'Unknown error' }));
-    throw new Error(err.detail || `HTTP ${response.status}`);
+    const err = await response.json().catch(() => ({ detail: 'Unknown error occurred during analysis.' }));
+    // Security: Sanitize error messages to prevent leaking internal stack traces to the UI
+    const safeErrorMsg = err.detail && typeof err.detail === 'string' && !err.detail.includes('Traceback') 
+      ? err.detail 
+      : 'An unexpected error occurred while analyzing the text. Please try again.';
+    throw new Error(safeErrorMsg);
   }
 
   return response.json();
@@ -51,8 +55,12 @@ export async function uploadFile(
   });
 
   if (!response.ok) {
-    const err = await response.json().catch(() => ({ detail: 'Unknown error' }));
-    throw new Error(err.detail || `HTTP ${response.status}`);
+    const err = await response.json().catch(() => ({ detail: 'Unknown error occurred during upload.' }));
+    // Security: Sanitize error messages to prevent leaking internal stack traces to the UI
+    const safeErrorMsg = err.detail && typeof err.detail === 'string' && !err.detail.includes('Traceback') 
+      ? err.detail 
+      : 'An unexpected error occurred while uploading the file. Please ensure it is a valid PDF, DOCX, or TXT under 10MB.';
+    throw new Error(safeErrorMsg);
   }
 
   return response.json();

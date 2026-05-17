@@ -45,12 +45,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS for frontend
+# CORS for frontend (Hackathon config, consider restricting for production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"], # NOTE: Set to specific domains in production
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -149,6 +149,13 @@ async def upload_file(
         )
 
     content = await file.read()
+    
+    # Security: 10MB file size limit
+    if len(content) > 10 * 1024 * 1024:
+        raise HTTPException(
+            status_code=413,
+            detail="File too large. Maximum size is 10MB."
+        )
 
     try:
         if ext == ".pdf":

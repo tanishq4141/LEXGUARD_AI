@@ -54,6 +54,18 @@ Return ONLY the JSON array. No markdown, no commentary, no code fences."""
 async def extract_clauses(model: genai.GenerativeModel, document_text: str, contract_type: str = "Unknown", tracker=None) -> list[ClauseExtraction]:
     """
     Extract and classify all legally significant clauses from a document.
+
+    Args:
+        model (genai.GenerativeModel): The generative AI model to use.
+        document_text (str): The raw text of the contract.
+        contract_type (str, optional): The type of contract. Defaults to "Unknown".
+        tracker (TokenTracker, optional): Tracker for API telemetry. Defaults to None.
+
+    Returns:
+        list[ClauseExtraction]: A list of structured clauses extracted from the document.
+        
+    Raises:
+        ValueError: If the API fails to return a parseable JSON array.
     """
     prompt = EXTRACTOR_SYSTEM_PROMPT.format(contract_type=contract_type)
     response = await model.generate_content_async(
