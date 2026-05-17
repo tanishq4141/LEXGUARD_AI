@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.pyc
+
+# Git
+.git/
+.gitignore
+
+# Environment variables
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+
+# Build artifacts
+frontend/dist/
+frontend/build/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
